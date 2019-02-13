@@ -72,7 +72,7 @@ while True:
         print_current_room()
 
 
-    if len(user_input) > 1:
+    if len(user_input.split(' ')) > 1:
         user_input_list = user_input.split(' ')
         item = user_input_list[1].lower()
         if user_input_list[0] == "take":
@@ -97,4 +97,5 @@ while True:
         p.current_room = room[p.place].w_to
         p.place = [k for k,v in room.items() if v == room[p.place].w_to][0]
     else:
-        print_room_error()
+        if len(user_input.split(" ")) == 1:
+            print_room_error()
