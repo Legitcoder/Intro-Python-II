@@ -1,5 +1,6 @@
 from room import Room
-
+from player import Player
+import pdb
 # Declare all the rooms
 
 room = {
@@ -38,7 +39,6 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +49,30 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+p = Player('outside', room['outside'])
+
+def print_error():
+    print("Illegal Move! Room doesn't exist. Try again.")
+
+
+while True:
+    print(p.current_room.name)
+    user_input = input("What direction do you want to go? ")
+    try:
+        if user_input == 'q':
+            i = 0
+            break
+        elif user_input == 'n':
+            p.current_room = room[p.place].n_to
+            p.place = [k for k,v in room.items() if v == room[p.place].n_to][0]
+        elif user_input == 's':
+            p.current_room = room[p.place].s_to
+            p.place = [k for k,v in room.items() if v == room[p.place].s_to][0]
+        elif user_input == 'e':
+            p.current_room = room[p.place].e_to
+            p.place = [k for k,v in room.items() if v == room[p.place].e_to][0]
+        elif user_input == 'w':
+            p.current_room = room[p.place].w_to
+            p.place = [k for k,v in room.items() if v == room[p.place].w_to][0]
+    except:
+        print_error()
