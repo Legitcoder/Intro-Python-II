@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+import textwrap
 import pdb
 # Declare all the rooms
 
@@ -55,24 +56,31 @@ def print_error():
     print("Illegal Move! Room doesn't exist. Try again.")
 
 
-while True:
+def print_current_room():
     print(p.current_room.name)
+    wrapped_lines = textwrap.wrap(p.current_room.description)
+    for line in wrapped_lines:
+        print(line)
+
+
+while True:
     user_input = input("What direction do you want to go? ")
-    try:
-        if user_input == 'q':
-            i = 0
-            break
-        elif user_input == 'n':
-            p.current_room = room[p.place].n_to
-            p.place = [k for k,v in room.items() if v == room[p.place].n_to][0]
-        elif user_input == 's':
-            p.current_room = room[p.place].s_to
-            p.place = [k for k,v in room.items() if v == room[p.place].s_to][0]
-        elif user_input == 'e':
-            p.current_room = room[p.place].e_to
-            p.place = [k for k,v in room.items() if v == room[p.place].e_to][0]
-        elif user_input == 'w':
-            p.current_room = room[p.place].w_to
-            p.place = [k for k,v in room.items() if v == room[p.place].w_to][0]
-    except:
+    if user_input == 'n' or user_input == 's' or user_input == 'w' or user_input == 'e':
+        print_current_room()
+    if user_input == 'q':
+        i = 0
+        break
+    elif user_input == 'n':
+        p.current_room = room[p.place].n_to
+        p.place = [k for k,v in room.items() if v == room[p.place].n_to][0]
+    elif user_input == 's':
+        p.current_room = room[p.place].s_to
+        p.place = [k for k,v in room.items() if v == room[p.place].s_to][0]
+    elif user_input == 'e':
+        p.current_room = room[p.place].e_to
+        p.place = [k for k,v in room.items() if v == room[p.place].e_to][0]
+    elif user_input == 'w':
+        p.current_room = room[p.place].w_to
+        p.place = [k for k,v in room.items() if v == room[p.place].w_to][0]
+    else:
         print_error()
