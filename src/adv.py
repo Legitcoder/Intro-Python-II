@@ -68,8 +68,6 @@ while True:
             p.take(item)
         elif user_input_list[0] == "drop":
             p.drop(item)
-        else:
-            print_input_error()
 
     if user_input == 'q':
         break
