@@ -24,7 +24,7 @@ class Player:
 
     def take(self, item_name):
         try:
-            item = [self.item for self.current_room.item in self.current_room.items if item_name == self.current_room.item.name][0]
+            item = [self.current_room.item for self.current_room.item in self.current_room.items if item_name == self.current_room.item.name][0]
         except:
             print(f"Item {item_name} does not exist in room")
             return

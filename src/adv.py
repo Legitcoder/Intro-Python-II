@@ -95,7 +95,7 @@ while True:
     elif user_input == 'e' and hasattr(p.current_room, direction):
         p.current_room = p.current_room.e_to
     elif user_input == 'w' and hasattr(p.current_room, direction):
-        p.current_room = p.current_room.e_to
+        p.current_room = p.current_room.w_to
     elif user_input == 'i' or user_input == 'inventory':
         if p.items: item_names = [p.item.name for p.item in p.items]
         if p.items: print(f" \n {', '.join(item_names)} \n")
