@@ -12,15 +12,22 @@ class Player:
 
 
     def drop(self, item_name):
-        item = [self.item for self.item in self.items if item_name == self.item.name][0]
-        if item in self.items:
-            self.items.remove(item)
-            item.on_drop()
-            self.current_room.add(item)
-        else:
-            print(f"Player does not have {item.name}")
+        try:
+            item = [self.item for self.item in self.items if item_name == self.item.name][0]
+        except:
+            print(f"Player does not have {item_name}")
+            return
+        self.items.remove(item)
+        item.on_drop()
+        self.current_room.add(item)
 
-    def take(self, item):
+
+    def take(self, item_name):
+        try:
+            item = [self.item for self.current_room.item in self.current_room.items if item_name == self.current_room.item.name][0]
+        except:
+            print(f"Item {item_name} does not exist in room")
+            return
         self.current_room.remove(item)
         self.items.append(item)
-        #item.on_take()
+        item.on_take()
