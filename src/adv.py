@@ -1,5 +1,7 @@
 from room import Room
 from player import Player
+from item import Item
+import random
 import textwrap
 import pdb
 # Declare all the rooms
@@ -22,6 +24,8 @@ to north. The smell of gold permeates the air."""),
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
+
+rooms = room.values()
 
 
 # Link rooms together
@@ -52,14 +56,17 @@ room['treasure'].s_to = room['narrow']
 # If the user enters "q", quit the game.
 p = Player(room['outside'])
 
+items = [Item("sword"), Item("axe"), Item("coins"), Item("ladder"), Item("emerald"), Item("ruby"), Item("bow"), Item("book")]
+
+while items:
+    item = random.choice(items)
+    p.items.append(item)
+    items.remove(item)
+
+
+
 while True:
     user_input = input("What direction do you want to go? ")
-
-    user_input = user_input.lower()[0]
-
-    print(p.current_room.name)
-    print(p.current_room.description)
-
 
     if len(user_input.split(' ')) > 1:
         user_input_list = user_input.split(' ')
@@ -68,6 +75,11 @@ while True:
             p.take(item)
         elif user_input_list[0] == "drop":
             p.drop(item)
+
+    user_input = user_input.lower()[0]
+
+    print(p.current_room.name)
+    print(p.current_room.description)
 
     if user_input == 'q':
         break
