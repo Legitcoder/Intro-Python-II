@@ -68,6 +68,9 @@ def print_current_room():
 
 while True:
     user_input = input("What direction do you want to go? ")
+
+    user_input = user_input.lower()
+
     if user_input == 'n' or user_input == 's' or user_input == 'w' or user_input == 'e':
         print_current_room()
 
@@ -85,17 +88,15 @@ while True:
     if user_input == 'q':
         break
     elif user_input == 'n':
-        p.current_room = room[p.place].n_to
-        p.place = [k for k,v in room.items() if v == room[p.place].n_to][0]
+        p.current_room = p.current_room.n_to
     elif user_input == 's':
-        p.current_room = room[p.place].s_to
-        p.place = [k for k,v in room.items() if v == room[p.place].s_to][0]
+        p.current_room = p.current_room.s_to
     elif user_input == 'e':
-        p.current_room = room[p.place].e_to
-        p.place = [k for k,v in room.items() if v == room[p.place].e_to][0]
+        p.current_room = p.current_room.e_to
     elif user_input == 'w':
-        p.current_room = room[p.place].w_to
-        p.place = [k for k,v in room.items() if v == room[p.place].w_to][0]
+        p.current_room = p.current_room.w_to
+    elif user_input == 'i' or user_input == 'inventory':
+        print(p.items)
     else:
         if len(user_input.split(" ")) == 1:
             print_room_error()

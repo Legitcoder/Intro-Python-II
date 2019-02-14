@@ -2,9 +2,8 @@
 # currently.
 class Player:
 
-    def __init__(self, place, current_room, items=[]):
+    def __init__(self, current_room, items=[]):
         self.current_room = current_room
-        self.place = place
         self.items = items
 
 
@@ -14,7 +13,7 @@ class Player:
             item.on_drop()
             self.current_room.add(item)
         else:
-            print("Player does not have such item")
+            print(f"Player does not have {item.name}")
 
     def take(self, item):
         self.current_room.remove(item)
