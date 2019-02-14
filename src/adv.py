@@ -50,7 +50,7 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-p = Player('outside', room['outside'])
+p = Player(room['outside'])
 
 def print_room_error():
     print("Illegal Move! Room doesn't exist. Try again.")
@@ -71,8 +71,8 @@ while True:
 
     user_input = user_input.lower()
 
-    if user_input == 'n' or user_input == 's' or user_input == 'w' or user_input == 'e':
-        print_current_room()
+    print(p.current_room.name)
+    print(p.current_room.description)
 
 
     if len(user_input.split(' ')) > 1:
@@ -94,7 +94,7 @@ while True:
     elif user_input == 'e':
         p.current_room = p.current_room.e_to
     elif user_input == 'w':
-        p.current_room = p.current_room.w_to
+        p.current_room = p.current_room.e_to
     elif user_input == 'i' or user_input == 'inventory':
         print(p.items)
     else:

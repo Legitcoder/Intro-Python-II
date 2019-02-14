@@ -8,6 +8,8 @@ class Room:
         self.description = description
         self.items = items
 
+    def __str__(self):
+        return f"{self.name}, {self.description}"
 
     def add(self, item):
         self.items.append(item)
