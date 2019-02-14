@@ -78,10 +78,11 @@ while True:
 
     if len(user_input.split(' ')) > 1:
         user_input_list = user_input.split(' ')
+        command = user_input_list[0]
         item = user_input_list[1].lower()
-        if user_input_list[0] == "take":
+        if command == "take" or command == "get":
             p.take(item)
-        elif user_input_list[0] == "drop":
+        elif command == "drop":
             p.drop(item)
 
     user_input = user_input.lower()[0]
