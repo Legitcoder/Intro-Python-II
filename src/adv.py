@@ -52,24 +52,10 @@ room['treasure'].s_to = room['narrow']
 # If the user enters "q", quit the game.
 p = Player(room['outside'])
 
-def print_room_error():
-    print("Illegal Move! Room doesn't exist. Try again.")
-
-def print_input_error():
-    print("Invalid Input")
-
-
-def print_current_room():
-    print(p.current_room.name)
-    wrapped_lines = textwrap.wrap(p.current_room.description)
-    for line in wrapped_lines:
-        print(line)
-
-
 while True:
     user_input = input("What direction do you want to go? ")
 
-    user_input = user_input.lower()
+    user_input = user_input.lower()[0]
 
     print(p.current_room.name)
     print(p.current_room.description)
@@ -99,4 +85,4 @@ while True:
         print(p.items)
     else:
         if len(user_input.split(" ")) == 1:
-            print_room_error()
+            print("Illegal Move! Room doesn't exist. Try again.")
