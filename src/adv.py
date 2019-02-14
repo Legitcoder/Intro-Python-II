@@ -25,7 +25,7 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
-rooms = room.values()
+rooms = list(room.keys())
 
 
 # Link rooms together
@@ -54,18 +54,26 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-p = Player(room['outside'])
+
+def print_error():
+    print("\n \n Illegal Move! Room doesn't exist. Try again. \n \n")
 
 items = [Item("sword"), Item("axe"), Item("coins"), Item("ladder"), Item("emerald"), Item("ruby"), Item("bow"), Item("book")]
+player_items = random.sample(items, 2)
+p = Player(room['outside'], player_items)
+items = list(set(items).difference(set(player_items)))
+
 
 while items:
     item = random.choice(items)
-    p.items.append(item)
+    random_room = room[random.choice(rooms)]
     items.remove(item)
+    random_room.add(item)
 
 
 
 while True:
+    print(p.current_room)
     user_input = input("What direction do you want to go? ")
 
     if len(user_input.split(' ')) > 1:
@@ -77,22 +85,21 @@ while True:
             p.drop(item)
 
     user_input = user_input.lower()[0]
-
-    print(p.current_room.name)
-    print(p.current_room.description)
-
+    direction = f'{user_input}_to'
     if user_input == 'q':
         break
-    elif user_input == 'n':
+    elif user_input == 'n' and hasattr(p.current_room, direction):
         p.current_room = p.current_room.n_to
-    elif user_input == 's':
+    elif user_input == 's' and hasattr(p.current_room, direction):
         p.current_room = p.current_room.s_to
-    elif user_input == 'e':
+    elif user_input == 'e' and hasattr(p.current_room, direction):
         p.current_room = p.current_room.e_to
-    elif user_input == 'w':
+    elif user_input == 'w' and hasattr(p.current_room, direction):
         p.current_room = p.current_room.e_to
     elif user_input == 'i' or user_input == 'inventory':
-        print(p.items)
+        if p.items: item_names = [p.item.name for p.item in p.items]
+        if p.items: print(f" \n {', '.join(item_names)} \n")
+    elif user_input == 't' or user_input == 'g' or user_input == 'd':
+        pass
     else:
-        if len(user_input.split(" ")) == 1:
-            print("Illegal Move! Room doesn't exist. Try again.")
+        print_error()

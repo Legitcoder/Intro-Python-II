@@ -7,7 +7,12 @@ class Player:
         self.items = items
 
 
-    def drop(self, item):
+    def print_items(self):
+        print(self.items)
+
+
+    def drop(self, item_name):
+        item = [self.item for self.item in self.items if item_name == self.item.name][0]
         if item in self.items:
             self.items.remove(item)
             item.on_drop()
@@ -18,4 +23,4 @@ class Player:
     def take(self, item):
         self.current_room.remove(item)
         self.items.append(item)
-        item.on_take()
+        #item.on_take()

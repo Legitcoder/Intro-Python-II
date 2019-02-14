@@ -3,13 +3,15 @@
 
 class Room:
 
-    def __init__(self, name, description, items=[]):
+    def __init__(self, name, description):
         self.name = name
         self.description = description
-        self.items = items
+        self.items = []
 
     def __str__(self):
-        return f"{self.name}, {self.description}"
+        item_names = [item.name for item in self.items]
+        items_list_str = ', '.join(item_names) if self.items else ""
+        return f"{self.name}, {self.description} \n{items_list_str}"
 
     def add(self, item):
         self.items.append(item)
